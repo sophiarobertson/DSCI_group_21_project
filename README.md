@@ -22,7 +22,7 @@ exam_data1
 exam_graph <- exam_data1 |>
 ggplot(aes(x = math_score, y = reading_score, color = parental_level_of_education)) +
 geom_point(alpha = 0.5) +
-labs(color = "Parental level of education")
+labs(color = "Parental level of education", y = "Reading Score", x = "Math Score")
 
 exam_graph
 
