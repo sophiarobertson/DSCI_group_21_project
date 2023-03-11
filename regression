@@ -19,7 +19,8 @@ graph3
 
 exam_data1<- exam_data |>
 mutate("mean_score" = (math_score + reading_score + writing_score)/3) |>
-select(math_score, reading_score, writing_score, mean_score)
+mutate(student = seq(from = 1, to = 1000)) |>
+select(student, math_score, reading_score, writing_score, mean_score)
 
 exam_data1
 
