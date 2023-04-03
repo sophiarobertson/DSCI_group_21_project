@@ -1,0 +1,39 @@
+url <- "http://roycekimmons.com/system/generate_data.php?dataset=exams&n=1000"
+exam_data <- read_csv(url)
+colnames(exam_data) <- c("gender", "race_ethnicity", "parental_level_of_education", "lunch", "test_preparation_course", 
+                         "math_score", "reading_score", "writing_score")
+                      
+exam_data1<- exam_data |>
+mutate("mean_score" = (math_score + reading_score + writing_score)/3) |>
+mutate(student = seq(from = 1, to = 1000)) |>
+select(student, math_score, reading_score, writing_score, mean_score)
+
+graph1 <- ggplot(data_train, aes(x = reading_score, y = writing_score)) +
+geom_point() +
+xlab("Reading Score") +
+ylab("writing Score")
+
+graph2 <- ggplot(data_train, aes(x = math_score, y = writing_score)) +
+geom_point() +
+xlab("Math Score") +
+ylab("writing Score")
+
+graph3 <- ggplot(data_train, aes(x = math_score, y = reading_score)) +
+geom_point() +
+xlab("Math Score") +
+ylab("Reading Score")
+
+graph1
+graph2
+graph3
+
+exam_data1
+
+data_split <- initial_split(exam_data1, prop = 0.75, strata = reading_score)
+data_train <- training(data_split)
+data_test <- testing(data_split)
+
+data_train
+data_test
+
+summary(data_train)
